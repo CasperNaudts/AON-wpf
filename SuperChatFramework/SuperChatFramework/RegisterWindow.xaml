@@ -1,0 +1,16 @@
+﻿<Window x:Class="SuperChatFramework.RegisterWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SuperChatFramework"
+        mc:Ignorable="d"
+        Title="RegisterWindow" Height="450" Width="800">
+    <Grid>
+        <TextBox x:Name="UsernameTextbox" HorizontalAlignment="Left" Height="23" Margin="331,92,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="166"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166" Margin="331,120,0,0"/>
+        <PasswordBox x:Name="PasswordcheckBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166" Margin="331,143,0,0"/>
+        <Button x:Name="RegisterButton" Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166" Margin="331,166,0,0" Click="RegisterButton_Click"/>
+
+    </Grid>
+</Window>

@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Data.Entity;
 using SuperChat.Domain;
 
 namespace SuperChat.Data
@@ -9,13 +9,18 @@ namespace SuperChat.Data
         public DbSet<Message> Messages { get; set; }
         public DbSet<Chat> Chats { get; set; }
 
-        protected void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.UseSqlServer("Server = (localdb)\\mssqllocaldb; Database = SuperChatAppData; Trusted_Connection = True; ");
             base.OnConfiguring(optionsBuilder);
         }
 
-        protected void OnModelCreating(ModelBuilder modelBuilder)
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
         }

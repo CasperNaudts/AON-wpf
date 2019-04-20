@@ -6,11 +6,13 @@ namespace SuperChat.Business
 {
     public class AsymmetricEncryption
     {
-        public static Byte[] Encrypt(byte[] dataToEncrypt, User recipientUser)
+
+        public static byte[] Encrypt(byte[] dataToEncrypt, User recipientUser)
         {
             RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
+            RSA.FromXmlString(recipientUser.PublicKey);
 
-            return RSAEncrypt(dataToEncrypt, RSA.ExportParameters(false), false);
+            return RSA.Encrypt(dataToEncrypt,false);
         }
 
         public static string ExportOptions()
@@ -19,11 +21,12 @@ namespace SuperChat.Business
             return RSA.ToXmlString(true);
         }
 
-        public static Byte[] Decrypt(byte[] encryptedData)
+        public static byte[] Decrypt(byte[] encryptedData)
         {
             RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
+            RSA.ImportParameters(RSA.ExportParameters(true));
 
-            return RSADecrypt(encryptedData, RSA.ExportParameters(true), false);
+            return RSA.Decrypt(encryptedData, false);
         }
 
         public static byte[] RSAEncrypt(byte[] DataToEncrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
