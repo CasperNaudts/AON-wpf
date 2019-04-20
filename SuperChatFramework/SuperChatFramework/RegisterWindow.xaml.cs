@@ -1,17 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Security.Cryptography;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using SuperChat.Data;
 using SuperChat.Domain;
 
@@ -36,13 +24,18 @@ namespace SuperChatFramework
                 user.Password = PasswordBox.Password;
 
                 CspParameters cp = new CspParameters();
-                cp.KeyContainerName = "SuperChat";
+                cp.KeyContainerName = "SuperChat" + user.Name;
 
                 var RSA = new RSACryptoServiceProvider(cp);
                 user.PublicKey = RSA.ToXmlString(false);
 
                 SuperChatContext context = new SuperChatContext();
-                context.Add(user);
+                context.Users.Add(user);
+                context.SaveChanges();
+
+                ChatListWindows window = new ChatListWindows(RSA, user);
+                window.Show();
+                Close();
             }
             else
             {

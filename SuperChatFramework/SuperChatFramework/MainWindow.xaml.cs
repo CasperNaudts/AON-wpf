@@ -32,7 +32,7 @@ namespace SuperChatFramework
                 return;
             }
 
-            User user = context.Users.Where(u => u.Name == UsernameTextBox.Text).First();
+            User user = context.Users.First(u => u.Name == UsernameTextBox.Text && u.Password == PasswordPasswordBox.Password);
 
             if (user == null)
             {
@@ -40,11 +40,11 @@ namespace SuperChatFramework
             }
 
             CspParameters cp = new CspParameters();
-            cp.KeyContainerName = "SuperChat";
+            cp.KeyContainerName = "superChat" + user.Name;
 
             var rsa = new RSACryptoServiceProvider(cp);
 
-            ChatListWindows window = new ChatListWindows(rsa);
+            ChatListWindows window = new ChatListWindows(rsa, user);
             window.Show();
             Close();
 

@@ -5,8 +5,23 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SuperChatFramework"
         mc:Ignorable="d"
-        Title="ChatListWindows" Height="450" Width="800">
+        Title="ChatListWindows" Height="450" Width="488.75">
     <Grid>
-        
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Height="auto" Width="auto" Grid.Row="0" Name="nieuweChatButton" Click="NieuweChatButton_Click">
+            <Grid>
+                <Label Content="+  nieuwe chat starten"></Label>
+            </Grid>
+        </Button>
+        <DataGrid Grid.Row="1" ItemsSource="{Binding Chats}">
+            <DataGrid.ItemContainerStyle>
+                <Style TargetType="DataGridRow">
+                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
+                </Style>
+            </DataGrid.ItemContainerStyle>
+        </DataGrid>
     </Grid>
 </Window>
