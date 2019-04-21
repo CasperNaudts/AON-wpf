@@ -23,8 +23,8 @@ namespace SuperChatFramework
 
             SuperChatContext context = new SuperChatContext();
 
-            var chats = context.Chats.Where(chat => chat.Users.Contains(_logedInUser)).ToList();
-            DataContext = chats;
+            var chats = context.Chats.ToList();
+            DataGrid.ItemsSource = chats;
         }
         private void Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {

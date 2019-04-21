@@ -1,5 +1,11 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Text;
 using System.Windows;
+using Newtonsoft.Json;
 using SuperChat.Data;
 using SuperChat.Domain;
 
@@ -8,10 +14,10 @@ namespace SuperChatFramework
     /// <summary>
     /// Interaction logic for NewChatWindow.xaml
     /// </summary>
-    public partial class NewChatWindow : Window
+    public partial class NewChatWindow
     {
         private User _logedInUser;
-        private SuperChatContext _context;
+        private readonly SuperChatContext _context;
 
         public NewChatWindow(User logedInUser)
         {
@@ -19,13 +25,40 @@ namespace SuperChatFramework
             InitializeComponent();
 
             _context = new SuperChatContext();
-            var users = context.Users.Where(user => user != _logedInUser).ToList();
-            DataContext = users;
+            var users = _context.Users.Where(user => user != _logedInUser).ToList();
+            SelectedUserComboBox.ItemsSource = users;
         }
 
         private void CreateChatButton_Click(object sender, RoutedEventArgs e)
         {
             Chat chat = new Chat();
+            User selectedUser = _context.Users.Find(((User)SelectedUserComboBox.SelectionBoxItem).Id);
+
+            Aes aesAlg = Aes.Create();
+
+            aesAlg.GenerateKey();
+            var key = aesAlg.Key;
+            
+            Key loggedInKey = new Key();
+            RSACryptoServiceProvider loggedInRsa = new RSACryptoServiceProvider();
+            loggedInRsa.FromXmlString(_logedInUser.PublicKey);
+            loggedInKey.KeyBytes = loggedInRsa.Encrypt(key, false);
+            loggedInKey.Chat = chat;
+            loggedInKey.UserId = _logedInUser.Id;
+
+            chat.Keys.Add(loggedInKey);
+            
+            Key selectedUserKey = new Key();
+            RSACryptoServiceProvider selectedUserRsa = new RSACryptoServiceProvider();
+            selectedUserRsa.FromXmlString(selectedUser.PublicKey);
+            selectedUserKey.KeyBytes = selectedUserRsa.Encrypt(key, false);
+            selectedUserKey.Chat = chat;
+            selectedUserKey.UserId = selectedUser.Id;
+
+            chat.Keys.Add(selectedUserKey);
+
+            _context.Keys.Add(loggedInKey);
+            _context.Keys.Add(selectedUserKey);
             _context.Chats.Add(chat);
             _context.SaveChanges();
         }

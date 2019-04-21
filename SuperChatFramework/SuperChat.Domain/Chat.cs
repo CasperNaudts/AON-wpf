@@ -7,14 +7,13 @@ namespace SuperChat.Domain
     public class Chat
     {
         public int Id { get; set; }
-        public IList<User> Users { get; set; }
         public IList<Message> Messages { get; set; }
-        [NotMapped]
-        public Dictionary<User, byte[]> Keys { get; set; }
+        public IList<Key> Keys { get; set; }
 
-        public string KeysJson {
-            get => JsonConvert.SerializeObject(Keys);
-            set => JsonConvert.DeserializeObject<Dictionary<User, byte[]>>(value);
+        public Chat()
+        {
+            Messages = new List<Message>();
+            Keys = new List<Key>();
         }
     }
 }
