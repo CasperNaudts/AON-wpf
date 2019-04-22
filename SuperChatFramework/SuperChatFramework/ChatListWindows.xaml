@@ -16,12 +16,8 @@
                 <Label Content="+  nieuwe chat starten"></Label>
             </Grid>
         </Button>
-        <DataGrid Name="DataGrid" Grid.Row="1" ItemsSource="{Binding Chats}">
-            <DataGrid.ItemContainerStyle>
-                <Style TargetType="DataGridRow">
-                    <EventSetter Event="MouseDoubleClick" Handler="Row_DoubleClick"/>
-                </Style>
-            </DataGrid.ItemContainerStyle>
-        </DataGrid>
+        <ListView Grid.Row="1" x:Name="ChatToUsersListView">
+
+        </ListView>
     </Grid>
 </Window>
