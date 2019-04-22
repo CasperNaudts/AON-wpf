@@ -44,7 +44,7 @@ namespace SuperChatFramework
 
             var rsa = new RSACryptoServiceProvider(cp);
 
-            ChatListWindows window = new ChatListWindows(rsa, user);
+            ChatListWindow window = new ChatListWindow(rsa, user);
             window.Show();
             Close();
 

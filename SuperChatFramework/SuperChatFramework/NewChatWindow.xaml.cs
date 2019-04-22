@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
 using System.Windows;
-using Newtonsoft.Json;
 using SuperChat.Data;
 using SuperChat.Domain;
 
@@ -61,6 +56,7 @@ namespace SuperChatFramework
             _context.Keys.Add(selectedUserKey);
             _context.Chats.Add(chat);
             _context.SaveChanges();
+            Close();
         }
     }
 }

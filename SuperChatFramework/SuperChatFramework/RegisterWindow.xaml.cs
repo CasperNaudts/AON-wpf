@@ -33,7 +33,7 @@ namespace SuperChatFramework
                 context.Users.Add(user);
                 context.SaveChanges();
 
-                ChatListWindows window = new ChatListWindows(RSA, user);
+                ChatListWindow window = new ChatListWindow(RSA, user);
                 window.Show();
                 Close();
             }

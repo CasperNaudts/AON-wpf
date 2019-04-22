@@ -142,8 +142,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="ChatListWindows.xaml.cs">
-      <DependentUpon>ChatListWindows.xaml</DependentUpon>
+    <Compile Include="ChatListWindow.xaml.cs">
+      <DependentUpon>ChatListWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="ChatWindow.xaml.cs">
       <DependentUpon>ChatWindow.xaml</DependentUpon>
@@ -154,7 +154,7 @@
     <Compile Include="RegisterWindow.xaml.cs">
       <DependentUpon>RegisterWindow.xaml</DependentUpon>
     </Compile>
-    <Page Include="ChatListWindows.xaml">
+    <Page Include="ChatListWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
