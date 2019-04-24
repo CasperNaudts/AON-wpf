@@ -124,17 +124,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20190420144927_initial.cs" />
-    <Compile Include="Migrations\20190420144927_initial.designer.cs">
-      <DependentUpon>20190420144927_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190421152543_updates.cs" />
-    <Compile Include="Migrations\20190421152543_updates.designer.cs">
-      <DependentUpon>20190421152543_updates.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190421152823_updates2.cs" />
-    <Compile Include="Migrations\20190421152823_updates2.designer.cs">
-      <DependentUpon>20190421152823_updates2.cs</DependentUpon>
+    <Compile Include="Migrations\20190424182043_addIdFieldsToUser.cs" />
+    <Compile Include="Migrations\20190424182043_addIdFieldsToUser.designer.cs">
+      <DependentUpon>20190424182043_addIdFieldsToUser.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SuperChatContextModelSnapshot.cs" />
     <Compile Include="SuperChatContext.cs" />
@@ -150,6 +142,7 @@
       <Name>SuperChat.Domain</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

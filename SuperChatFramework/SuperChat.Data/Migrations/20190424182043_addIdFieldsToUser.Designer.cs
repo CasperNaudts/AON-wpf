@@ -10,8 +10,8 @@ using SuperChat.Data;
 namespace SuperChat.Data.Migrations
 {
     [DbContext(typeof(SuperChatContext))]
-    [Migration("20190421152543_updates")]
-    partial class updates
+    [Migration("20190424182043_addIdFieldsToUser")]
+    partial class addIdFieldsToUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -42,7 +42,7 @@ namespace SuperChat.Data.Migrations
 
                     b.Property<byte[]>("KeyBytes");
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -65,19 +65,15 @@ namespace SuperChat.Data.Migrations
 
                     b.Property<byte[]>("IV");
 
-                    b.Property<int?>("RecieverId");
+                    b.Property<int>("RecieverId");
 
-                    b.Property<int?>("SenderId");
+                    b.Property<int>("SenderId");
 
                     b.Property<DateTime>("TimeSend");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ChatId");
-
-                    b.HasIndex("RecieverId");
-
-                    b.HasIndex("SenderId");
 
                     b.ToTable("Messages");
                 });
@@ -108,7 +104,8 @@ namespace SuperChat.Data.Migrations
 
                     b.HasOne("SuperChat.Domain.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("SuperChat.Domain.Message", b =>
@@ -116,14 +113,6 @@ namespace SuperChat.Data.Migrations
                     b.HasOne("SuperChat.Domain.Chat")
                         .WithMany("Messages")
                         .HasForeignKey("ChatId");
-
-                    b.HasOne("SuperChat.Domain.User", "Reciever")
-                        .WithMany()
-                        .HasForeignKey("RecieverId");
-
-                    b.HasOne("SuperChat.Domain.User", "Sender")
-                        .WithMany()
-                        .HasForeignKey("SenderId");
                 });
 #pragma warning restore 612, 618
         }

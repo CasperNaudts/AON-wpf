@@ -6,10 +6,15 @@ namespace SuperChat.Domain
     {
         public int Id { get; set; }
         public string Content { get; set; }
-        public User Sender { get; set; }
-        public User Reciever { get; set; }
+        public int SenderId { get; set; }
+        public int RecieverId { get; set; }
         // 1 Reciever, indien groupchats worden toegevoegd moet dit naar een list worden omgezet
         public DateTime TimeSend { get; set; }
-        public byte[] IV { get; set; }
+        public byte[] Iv { get; set; }
+
+        public override string ToString()
+        {
+            return Content + "\t" + SenderId + "\t" + RecieverId;
+        }
     }
 }

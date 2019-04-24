@@ -1,6 +1,9 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using Newtonsoft.Json;
+using SuperChat.Data;
 using SuperChat.Domain;
 using Key = System.Windows.Input.Key;
 
@@ -61,8 +64,16 @@ namespace SuperChatFramework
             }
 
             Message message = new Message();
-            
-            message.Content = encrypted
+            message.Content = JsonConvert.SerializeObject(encrypted);
+            message.Iv = _symKeyAes.IV;
+            message.RecieverId = _targetUser.Id;
+            message.SenderId = _loggedInUser.Id;
+            message.TimeSend = DateTime.Now;
+
+            SuperChatContext context = new SuperChatContext();
+            context.Messages.Add(message);
+            context.SaveChanges();
+
         }
     }
 }
