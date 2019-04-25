@@ -9,43 +9,43 @@ namespace SuperChat.Business
 
         public static byte[] Encrypt(byte[] dataToEncrypt, User recipientUser)
         {
-            RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
-            RSA.FromXmlString(recipientUser.PublicKey);
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.FromXmlString(recipientUser.PublicKey);
 
-            return RSA.Encrypt(dataToEncrypt,false);
+            return rsa.Encrypt(dataToEncrypt,false);
         }
 
         public static string ExportOptions()
         {
-            RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
-            return RSA.ToXmlString(true);
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            return rsa.ToXmlString(true);
         }
 
         public static byte[] Decrypt(byte[] encryptedData)
         {
-            RSACryptoServiceProvider RSA = new RSACryptoServiceProvider();
-            RSA.ImportParameters(RSA.ExportParameters(true));
+            RSACryptoServiceProvider rsa = new RSACryptoServiceProvider();
+            rsa.ImportParameters(rsa.ExportParameters(true));
 
-            return RSA.Decrypt(encryptedData, false);
+            return rsa.Decrypt(encryptedData, false);
         }
 
-        public static byte[] RSAEncrypt(byte[] DataToEncrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
+        public static byte[] RsaEncrypt(byte[] dataToEncrypt, RSAParameters rsaKeyInfo, bool doOaepPadding)
         {
             try
             {
                 byte[] encryptedData;
                 //Create a new instance of RSACryptoServiceProvider.
-                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
                 {
 
                     //Import the RSA Key information. This only needs
                     //toinclude the public key information.
-                    RSA.ImportParameters(RSAKeyInfo);
+                    rsa.ImportParameters(rsaKeyInfo);
 
                     //Encrypt the passed byte array and specify OAEP padding.  
                     //OAEP padding is only available on Microsoft Windows XP or
                     //later.  
-                    encryptedData = RSA.Encrypt(DataToEncrypt, DoOAEPPadding);
+                    encryptedData = rsa.Encrypt(dataToEncrypt, doOaepPadding);
                 }
                 return encryptedData;
             }
@@ -59,22 +59,22 @@ namespace SuperChat.Business
             }
         }
 
-        public static byte[] RSADecrypt(byte[] DataToDecrypt, RSAParameters RSAKeyInfo, bool DoOAEPPadding)
+        public static byte[] RsaDecrypt(byte[] dataToDecrypt, RSAParameters rsaKeyInfo, bool doOaepPadding)
         {
             try
             {
                 byte[] decryptedData;
                 //Create a new instance of RSACryptoServiceProvider.
-                using (RSACryptoServiceProvider RSA = new RSACryptoServiceProvider())
+                using (RSACryptoServiceProvider rsa = new RSACryptoServiceProvider())
                 {
                     //Import the RSA Key information. This needs
                     //to include the private key information.
-                    RSA.ImportParameters(RSAKeyInfo);
+                    rsa.ImportParameters(rsaKeyInfo);
 
                     //Decrypt the passed byte array and specify OAEP padding.  
                     //OAEP padding is only available on Microsoft Windows XP or
                     //later.  
-                    decryptedData = RSA.Decrypt(DataToDecrypt, DoOAEPPadding);
+                    decryptedData = rsa.Decrypt(dataToDecrypt, doOaepPadding);
                 }
                 return decryptedData;
             }

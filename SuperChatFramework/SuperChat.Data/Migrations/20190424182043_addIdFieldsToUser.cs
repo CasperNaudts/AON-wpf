@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuperChat.Data.Migrations
 {
-    public partial class addIdFieldsToUser : Migration
+    public partial class AddIdFieldsToUser : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

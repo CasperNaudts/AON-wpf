@@ -19,6 +19,6 @@
                 </GridView>
             </ListView.View>
         </ListView>
-        <TextBox Grid.Row="2" Text="Hello" KeyDown="TextBox_KeyDown" Name="InputTextbox"></TextBox>
+        <TextBox Grid.Row="2" KeyDown="TextBox_KeyDown" Name="InputTextbox"/>
     </Grid>
 </Window>

@@ -26,14 +26,14 @@ namespace SuperChatFramework
                 CspParameters cp = new CspParameters();
                 cp.KeyContainerName = "SuperChat" + user.Name;
 
-                var RSA = new RSACryptoServiceProvider(cp);
-                user.PublicKey = RSA.ToXmlString(false);
+                var rsa = new RSACryptoServiceProvider(cp);
+                user.PublicKey = rsa.ToXmlString(false);
 
                 SuperChatContext context = new SuperChatContext();
                 context.Users.Add(user);
                 context.SaveChanges();
 
-                ChatListWindow window = new ChatListWindow(RSA, user);
+                ChatListWindow window = new ChatListWindow(rsa, user);
                 window.Show();
                 Close();
             }

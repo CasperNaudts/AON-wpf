@@ -11,7 +11,7 @@ namespace SuperChat.Data.Migrations
 {
     [DbContext(typeof(SuperChatContext))]
     [Migration("20190424182043_addIdFieldsToUser")]
-    partial class addIdFieldsToUser
+    partial class AddIdFieldsToUser
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -14,7 +14,7 @@ namespace SuperChat.Domain
 
         public override string ToString()
         {
-            return Content + "\t" + SenderId + "\t" + RecieverId;
+            return Content;
         }
     }
 }
