@@ -1,4 +1,5 @@
-﻿using System.Security.Cryptography;
+﻿using System;
+using System.Security.Cryptography;
 using System.Windows;
 using SuperChat.Data;
 using SuperChat.Domain;
@@ -21,6 +22,9 @@ namespace SuperChatFramework
             {
                 var user = new User();
                 user.Name = UsernameTextbox.Text;
+
+                
+
                 user.Password = PasswordBox.Password;
 
                 CspParameters cp = new CspParameters();
@@ -39,7 +43,8 @@ namespace SuperChatFramework
             }
             else
             {
-                //wachtwoord niet dubbel gelijk
+                MessageBox.Show("pls enter the same password man");
+               
             }
         }
     }
