@@ -15,7 +15,7 @@
                 <Label Content="+  nieuwe chat starten"></Label>
             </Grid>
         </Button>
-        <Button Margin="434,0,0,0">
+        <Button x:Name="LogoutButton" Margin="434,0,0,0" Click="LogoutButton_Click">
 
         </Button>
         <ListView Grid.Row="1" x:Name="ChatToUsersListView">

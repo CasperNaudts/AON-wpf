@@ -2,7 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Timers;
 using Newtonsoft.Json;
 using SuperChat.Business;
 using SuperChat.Data;
@@ -19,28 +18,21 @@ namespace SuperChatFramework
         private User _loggedInUser;
         private User _targetUser;
         private Aes _symKeyAes;
-        private RSACryptoServiceProvider _loggedinRsa;
-        private Chat _currentChat;
+        public Chat CurrentChat { get; }
 
         public ChatWindow(User loggedInUser, User targetUser, RSACryptoServiceProvider loggedinRsa, Chat chat)
         {
             _loggedInUser = loggedInUser;
             _targetUser = targetUser;
-            _loggedinRsa = loggedinRsa;
-            _currentChat = chat;
+            CurrentChat = chat;
             _symKeyAes = Aes.Create();
 
             InitializeComponent();
             TargetUserLabel.Content = _targetUser.Name;
 
-            _symKeyAes.Key = _loggedinRsa.Decrypt((chat.Keys.First(key => key.UserId == loggedInUser.Id)).KeyBytes, false);
+            _symKeyAes.Key = loggedinRsa.Decrypt((chat.Keys.First(key => key.UserId == loggedInUser.Id)).KeyBytes, false);
             _symKeyAes.GenerateIV();
 
-            ListMessages(_loggedInUser, _targetUser);
-        }
-
-        private void TimerOnElapsed(object sender, ElapsedEventArgs e)
-        {
             ListMessages(_loggedInUser, _targetUser);
         }
 
@@ -87,14 +79,14 @@ namespace SuperChatFramework
             ListMessages(_loggedInUser, _targetUser);
         }
 
-        private void ListMessages(User senderUser, User ReceiverUser)
+        private void ListMessages(User senderUser, User receiverUser)
         {
             SuperChatContext context = new SuperChatContext();
 
             MessagesListView.Items.Clear();
             var messageList = context.Messages
-                .Where(message => message.RecieverId == ReceiverUser.Id || message.RecieverId == senderUser.Id)
-                .Where(message => message.SenderId == ReceiverUser.Id || message.SenderId == senderUser.Id)
+                .Where(message => message.RecieverId == receiverUser.Id || message.RecieverId == senderUser.Id)
+                .Where(message => message.SenderId == receiverUser.Id || message.SenderId == senderUser.Id)
                 .OrderBy(message => message.TimeSend).ToList();
 
             foreach (var message in messageList)

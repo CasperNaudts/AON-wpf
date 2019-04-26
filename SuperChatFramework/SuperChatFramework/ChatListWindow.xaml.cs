@@ -17,6 +17,7 @@ namespace SuperChatFramework
         private RSACryptoServiceProvider _privateKey;
         private User _loggedInUser;
         private List<Chat> _chats;
+        private List<Key> _otherUserInChat;
 
         public ChatListWindow(RSACryptoServiceProvider privateKey, User loggedInUser)
         {
@@ -31,7 +32,7 @@ namespace SuperChatFramework
 
         private void NieuweChatButton_Click(object sender, RoutedEventArgs e)
         {
-            NewChatWindow window = new NewChatWindow(_loggedInUser);
+            NewChatWindow window = new NewChatWindow(_loggedInUser, _otherUserInChat);
             window.Show();
 
         }
@@ -49,17 +50,17 @@ namespace SuperChatFramework
                 _chats.Add(chat);
             }
 
-            var otherUserInChatList = new List<Key>();
+            _otherUserInChat = new List<Key>();
 
             foreach (var chat in _chats)
             {
                 var sleutels = context.Keys.Where(key => key.ChatId == chat.Id);
                 var var = sleutels.First(key => key.UserId != _loggedInUser.Id);
-                otherUserInChatList.Add(var);
+                _otherUserInChat.Add(var);
             }
 
             ChatToUsersListView.Items.Clear();
-            foreach (var key in otherUserInChatList)
+            foreach (var key in _otherUserInChat)
             {
                 ChatToUsersListView.Items.Add(context.Users.Find(key.UserId));
             }
@@ -69,8 +70,6 @@ namespace SuperChatFramework
         void listBoxItem_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             var selectedUser = (User) ChatToUsersListView.SelectedItem;
-            
-            SuperChatContext context = new SuperChatContext();
 
             Chat chat = _chats[ChatToUsersListView.SelectedIndex];
             
@@ -81,6 +80,13 @@ namespace SuperChatFramework
         private void Window_MouseEnter(object sender, MouseEventArgs e)
         {
             LoadData();
+        }
+
+        private void LogoutButton_Click(object sender, RoutedEventArgs e)
+        {
+            MainWindow window = new MainWindow();
+            window.Show();
+            Close();
         }
     }
 }

@@ -5,12 +5,15 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SuperChatFramework"
         mc:Ignorable="d"
-        Title="RegisterWindow" Height="450" Width="800">
+        Title="RegisterWindow" Height="510" Width="800">
     <Grid>
-        <TextBox x:Name="UsernameTextbox" HorizontalAlignment="Left" Height="23" Margin="331,92,0,0" TextWrapping="Wrap" Text="Username" VerticalAlignment="Top" Width="166"/>
-        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166" Margin="331,120,0,0"/>
-        <PasswordBox x:Name="PasswordcheckBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166" Margin="331,143,0,0"/>
-        <Button x:Name="RegisterButton" Content="Register" HorizontalAlignment="Left" VerticalAlignment="Top" Width="166" Margin="331,166,0,0" Click="RegisterButton_Click"/>
+        <Label Content="Username" Margin="10,50,564,346.5" FontSize="24"></Label>
+        <Label Content="Password" Margin="10,140,564,256.5" FontSize="24"/>
+        <Label Content="Confirm password" Margin="10,230,564,166.5" FontSize="24"/>
+        <TextBox x:Name="UsernameTextbox" HorizontalAlignment="Center" Margin="236,50,59,0" Text="" VerticalAlignment="Top" Height="85" Width="500" FontSize="48"/>
+        <PasswordBox x:Name="PasswordBox" HorizontalAlignment="Center" Margin="236,140,59,0" VerticalAlignment="Top" Height="85" Width="500" FontSize="48"/>
+        <PasswordBox x:Name="PasswordcheckBox" HorizontalAlignment="Center" Margin="236,230,59,0" VerticalAlignment="Top" Height="84" Width="500" FontSize="48"/>
+        <Button x:Name="RegisterButton" HorizontalAlignment="Center" Margin="58,0,59,30.5" Width="678" FontSize="48" Content="Registreer" Click="RegisterButton_Click" Height="85" VerticalAlignment="Bottom"/>
 
     </Grid>
 </Window>

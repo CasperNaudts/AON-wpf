@@ -1,17 +1,18 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Media;
+using SuperChat.Business;
 using SuperChat.Data;
 using SuperChat.Domain;
+using Key = System.Windows.Input.Key;
 
 namespace SuperChatFramework
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow
     {
         public MainWindow()
         {
@@ -19,6 +20,26 @@ namespace SuperChatFramework
         }
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
+        {
+            login();
+        }
+
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterWindow window = new RegisterWindow();
+            window.Show();
+            Close();
+        }
+
+        private void TextBox_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                login();
+            }
+        }
+
+        private void login()
         {
             SuperChatContext context = new SuperChatContext();
             if (UsernameTextBox.Text == "" || PasswordPasswordBox.Password == "")
@@ -33,13 +54,15 @@ namespace SuperChatFramework
                 return;
             }
 
-            try
+            User user = context.Users.First(u => u.Name == UsernameTextBox.Text);
+            if (Hash.HashInput(PasswordPasswordBox.Password, user.Salt) != user.Password)
             {
-             User user = context.Users.First(u => u.Name == UsernameTextBox.Text && u.Password == PasswordPasswordBox.Password);
+                MessageBox.Show("foutieve inloggegevens");
+                UsernameTextBox.Text = "";
+                PasswordPasswordBox.Password = "";
 
-               
-            
-          
+                return;
+            }
 
             CspParameters cp = new CspParameters();
             cp.KeyContainerName = "superChat" + user.Name;
@@ -50,25 +73,6 @@ namespace SuperChatFramework
             window.Show();
             Close();
 
-            }
-
-
-            catch (Exception)
-            {
-                MessageBox.Show("foutieve inloggegevens");
-                UsernameTextBox.Text = "";
-                PasswordPasswordBox.Password = "";
-            }
-
-
-
-        }
-
-        private void RegisterButton_Click(object sender, RoutedEventArgs e)
-        {
-            RegisterWindow window = new RegisterWindow();
-            window.Show();
-            Close();
         }
     }
 }

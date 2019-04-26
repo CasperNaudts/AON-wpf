@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace SuperChat.Domain
+﻿namespace SuperChat.Domain
 {
     public class User
     {
@@ -13,11 +11,6 @@ namespace SuperChat.Domain
         public override string ToString()
         {
             return Name;
-        }
-
-        public User()
-        {
-
         }
     }
 }

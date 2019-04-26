@@ -3,14 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:SuperChatFramework"
         mc:Ignorable="d"
-        Title="MainWindow" Height="509.654" Width="800">
+        Title="MainWindow" Height="510" Width="800">
 
     <Grid>
         <Label Content="Username" Margin="58,50,564,347" FontSize="24"></Label>
-        <TextBox  Cursor="Arrow" x:Name="UsernameTextBox" HorizontalAlignment="Center" Margin="236,50,59,0" Text="" VerticalAlignment="Top" Height="85" Width="500" FontSize="48" AcceptsReturn="True"/>
-        <PasswordBox x:Name="PasswordPasswordBox" HorizontalAlignment="Center" Margin="236,159,59,0" VerticalAlignment="Top" Height="85" Width="500" FontSize="48"/>
+        <TextBox  Cursor="Arrow" x:Name="UsernameTextBox" HorizontalAlignment="Center" Margin="236,50,59,0" Text="" VerticalAlignment="Top" Height="85" Width="500" FontSize="48" AcceptsReturn="True" KeyDown="TextBox_KeyDown"/>
+        <PasswordBox x:Name="PasswordPasswordBox" HorizontalAlignment="Center" Margin="236,159,59,0" VerticalAlignment="Top" Height="85" Width="500" FontSize="48" KeyDown="TextBox_KeyDown"/>
         <Button x:Name="LoginButton" HorizontalAlignment="Center" Margin="58,277,59,0" VerticalAlignment="Top" Height="85" Width="678" FontSize="48" Content="Login" Click="LoginButton_Click"/>
         <Button x:Name="RegisterButton" HorizontalAlignment="Center" Margin="58,367,59,0" VerticalAlignment="Top" Height="85" Width="678" FontSize="48" Content="Registreer" Click="RegisterButton_Click"/>
     </Grid>
