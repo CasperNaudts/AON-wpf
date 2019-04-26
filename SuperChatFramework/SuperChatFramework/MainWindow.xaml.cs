@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Media;
@@ -32,12 +33,13 @@ namespace SuperChatFramework
                 return;
             }
 
-            User user = context.Users.First(u => u.Name == UsernameTextBox.Text && u.Password == PasswordPasswordBox.Password);
-
-            if (user == null)
+            try
             {
-                return;
-            }
+             User user = context.Users.First(u => u.Name == UsernameTextBox.Text && u.Password == PasswordPasswordBox.Password);
+
+               
+            
+          
 
             CspParameters cp = new CspParameters();
             cp.KeyContainerName = "superChat" + user.Name;
@@ -47,6 +49,18 @@ namespace SuperChatFramework
             ChatListWindow window = new ChatListWindow(rsa, user);
             window.Show();
             Close();
+
+            }
+
+
+            catch (Exception)
+            {
+                MessageBox.Show("foutieve inloggegevens");
+                UsernameTextBox.Text = "";
+                PasswordPasswordBox.Password = "";
+            }
+
+
 
         }
 
