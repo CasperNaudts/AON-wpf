@@ -42,10 +42,13 @@ namespace SuperChatFramework
             _symKeyAes.Key = _loggedinRsa.Decrypt((chat.Keys.First(key => key.UserId == loggedInUser.Id)).KeyBytes, false);
             _symKeyAes.GenerateIV();
 
-            var timer = new System.Timers.Timer(1000);
-            timer.Elapsed +=TimerOnElapsed;
-            timer.AutoReset = true;
-            timer.Enabled = true;
+            //var timer = new System.Timers.Timer(1000);
+            //timer.Elapsed +=TimerOnElapsed;
+            //timer.AutoReset = true;
+            //timer.Enabled = true;
+
+            ListMessages(_loggedInUser, _targetUser);
+
 
         }
 
