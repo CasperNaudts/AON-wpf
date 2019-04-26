@@ -2,8 +2,6 @@
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
-using System.Text;
-using System.Threading;
 using System.Timers;
 using Newtonsoft.Json;
 using SuperChat.Business;
@@ -23,13 +21,9 @@ namespace SuperChatFramework
         private Aes _symKeyAes;
         private RSACryptoServiceProvider _loggedinRsa;
         private Chat _currentChat;
-        private SuperChatContext _context;
-
-
 
         public ChatWindow(User loggedInUser, User targetUser, RSACryptoServiceProvider loggedinRsa, Chat chat)
         {
-            _context = new SuperChatContext();
             _loggedInUser = loggedInUser;
             _targetUser = targetUser;
             _loggedinRsa = loggedinRsa;
@@ -42,14 +36,7 @@ namespace SuperChatFramework
             _symKeyAes.Key = _loggedinRsa.Decrypt((chat.Keys.First(key => key.UserId == loggedInUser.Id)).KeyBytes, false);
             _symKeyAes.GenerateIV();
 
-            //var timer = new System.Timers.Timer(1000);
-            //timer.Elapsed +=TimerOnElapsed;
-            //timer.AutoReset = true;
-            //timer.Enabled = true;
-
             ListMessages(_loggedInUser, _targetUser);
-
-
         }
 
         private void TimerOnElapsed(object sender, ElapsedEventArgs e)
@@ -91,17 +78,21 @@ namespace SuperChatFramework
             message.SenderId = _loggedInUser.Id;
             message.TimeSend = DateTime.Now;
 
-            _context.Messages.Add(message);
-            _context.SaveChanges();
+            SuperChatContext context = new SuperChatContext();
+
+            context.Messages.Add(message);
+            context.SaveChanges();
 
             InputTextbox.Text = "";
-
+            ListMessages(_loggedInUser, _targetUser);
         }
 
         private void ListMessages(User senderUser, User ReceiverUser)
         {
+            SuperChatContext context = new SuperChatContext();
+
             MessagesListView.Items.Clear();
-            var messageList = _context.Messages
+            var messageList = context.Messages
                 .Where(message => message.RecieverId == ReceiverUser.Id || message.RecieverId == senderUser.Id)
                 .Where(message => message.SenderId == ReceiverUser.Id || message.SenderId == senderUser.Id)
                 .OrderBy(message => message.TimeSend).ToList();
@@ -110,9 +101,14 @@ namespace SuperChatFramework
             {
                 _symKeyAes.IV = message.Iv;
                 message.Content = SymmetricEncryption.DecryptStringFromBytes_Aes(JsonConvert.DeserializeObject<byte[]>(message.Content), _symKeyAes);
-                message.Content = _context.Users.Find(message.SenderId).Name + ":\t" + message.Content;
+                message.Content = context.Users.Find(message.SenderId).Name + ":\t" + message.Content;
                 MessagesListView.Items.Add(message);
             }
+        }
+
+        private void Window_MouseMove(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            ListMessages(_loggedInUser, _targetUser);
         }
     }
 }
