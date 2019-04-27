@@ -9,18 +9,17 @@ using Key = SuperChat.Domain.Key;
 
 namespace SuperChatFramework
 {
-    /// <summary>
-    /// Interaction logic for ChatListWindow.xaml
-    /// </summary>
     public partial class ChatListWindow
     {
         private RSACryptoServiceProvider _privateKey;
         private User _loggedInUser;
         private List<Chat> _chats;
         private List<Key> _otherUserInChat;
+        private List<Window> windows;
 
         public ChatListWindow(RSACryptoServiceProvider privateKey, User loggedInUser)
         {
+            windows = new List<Window>();
             _privateKey = privateKey;
             _loggedInUser = loggedInUser;
             InitializeComponent();
@@ -33,8 +32,8 @@ namespace SuperChatFramework
         private void NieuweChatButton_Click(object sender, RoutedEventArgs e)
         {
             NewChatWindow window = new NewChatWindow(_loggedInUser, _otherUserInChat);
+            windows.Add(window);
             window.Show();
-
         }
 
         private void LoadData()
@@ -74,6 +73,7 @@ namespace SuperChatFramework
             Chat chat = _chats[ChatToUsersListView.SelectedIndex];
             
             ChatWindow window = new ChatWindow(_loggedInUser, selectedUser, _privateKey, chat);
+            windows.Add(window);
             window.Show();
         }
 
@@ -86,6 +86,15 @@ namespace SuperChatFramework
         {
             MainWindow window = new MainWindow();
             window.Show();
+
+            foreach (var w in windows)
+            {
+                if (w.IsLoaded)
+                {
+                    w.Close();
+                }
+            }
+
             Close();
         }
     }
