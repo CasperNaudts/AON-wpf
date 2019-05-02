@@ -5,20 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="ChatListWindow" Height="450" Width="488.75" MouseEnter="Window_MouseEnter">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Button Height="auto" Width="auto" Grid.Row="0" Name="nieuweChatButton" Click="NieuweChatButton_Click" Margin="0,0,50,0">
-            <Grid>
-                <Label Content="+  nieuwe chat starten"></Label>
-            </Grid>
-        </Button>
-        <Button x:Name="LogoutButton" Margin="434,0,0,0" Click="LogoutButton_Click">
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem Header="Acount">
+                <MenuItem x:Name="InportKeyMenuItem" Header="Inport Key" Click="InportKeyMenuItem_Click"></MenuItem>
+                <MenuItem x:Name="ExportKeyMenuItem" Header="Export Key" Click="ExportKeyMenuItem_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Button Height="auto" Width="auto" Grid.Row="0" Name="nieuweChatButton" Click="NieuweChatButton_Click" Margin="0,0,50,0">
+                <Grid>
+                    <Label Content="+  nieuwe chat starten"></Label>
+                </Grid>
+            </Button>
+            <Button x:Name="LogoutButton" Margin="434,0,0,0" Click="LogoutButton_Click">
 
-        </Button>
-        <ListView Grid.Row="1" x:Name="ChatToUsersListView">
-        </ListView>
-    </Grid>
+            </Button>
+            <ListView Grid.Row="1" x:Name="ChatToUsersListView">
+            </ListView>
+        </Grid>
+    </DockPanel>
 </Window>

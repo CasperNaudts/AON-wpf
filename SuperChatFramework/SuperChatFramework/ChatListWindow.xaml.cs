@@ -1,8 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Windows;
 using System.Windows.Input;
+using Microsoft.Win32;
 using SuperChat.Data;
 using SuperChat.Domain;
 using Key = SuperChat.Domain.Key;
@@ -96,6 +99,35 @@ namespace SuperChatFramework
             }
 
             Close();
+        }
+
+        private void InportKeyMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            openFileDialog.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
+            openFileDialog.Title = "Inport Key";
+            openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            openFileDialog.ShowDialog();
+
+            string xmlKey = File.ReadAllText(openFileDialog.FileName);
+
+            _privateKey.FromXmlString(xmlKey);
+
+            CspParameters cp = new CspParameters();
+            cp.KeyContainerName = "SuperChat" + _loggedInUser.Name;
+            //_privateKey.ImportCspBlob();
+        }
+
+        private void ExportKeyMenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.AddExtension = true;
+            saveFileDialog.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
+            saveFileDialog.Title = "Export Key";
+            saveFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.ShowDialog();
+
+            File.WriteAllText(saveFileDialog.FileName, _privateKey.ToXmlString(true));
         }
     }
 }
