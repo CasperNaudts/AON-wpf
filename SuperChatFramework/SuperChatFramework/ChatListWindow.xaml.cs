@@ -115,7 +115,7 @@ namespace SuperChatFramework
 
             CspParameters cp = new CspParameters();
             cp.KeyContainerName = "SuperChat" + _loggedInUser.Name;
-            //_privateKey.ImportCspBlob();
+            
         }
 
         private void ExportKeyMenuItem_Click(object sender, RoutedEventArgs e)
