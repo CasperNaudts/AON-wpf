@@ -102,5 +102,15 @@ namespace SuperChatFramework
         {
             ListMessages(_loggedInUser, _targetUser);
         }
+
+        private void OntsleuteMenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
+
+        private void VersleutelMenuItem_Click(object sender, System.Windows.RoutedEventArgs e)
+        {
+
+        }
     }
 }

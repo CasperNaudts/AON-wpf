@@ -5,20 +5,28 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
         Title="ChatWindow" Height="450" Width="600" MouseMove="Window_MouseMove">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"></RowDefinition>
-            <RowDefinition Height="*"></RowDefinition>
-            <RowDefinition Height="Auto"></RowDefinition>
-        </Grid.RowDefinitions>
-        <Label Grid.Row="0" Name="TargetUserLabel" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
-        <ListView x:Name="MessagesListView" Grid.Row="1" Margin="0,0,0,0">
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn/>
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <TextBox Grid.Row="2" KeyDown="TextBox_KeyDown" Name="InputTextbox"/>
-    </Grid>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top">
+            <MenuItem x:Name="FileMenuItem" Header="Files">
+                <MenuItem x:Name="VersleutelMenuItem" Header="Versleutel" Click="VersleutelMenuItem_Click"></MenuItem>
+                <MenuItem x:Name="OntsleuteMenuItem" Header="Ontsleutel" Click="OntsleuteMenuItem_Click"></MenuItem>
+            </MenuItem>
+        </Menu>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+                <RowDefinition Height="Auto"></RowDefinition>
+            </Grid.RowDefinitions>
+            <Label Grid.Row="0" Name="TargetUserLabel" HorizontalAlignment="Center" VerticalAlignment="Center"></Label>
+            <ListView x:Name="MessagesListView" Grid.Row="1" Margin="0,0,0,0">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn/>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+            <TextBox Grid.Row="2" KeyDown="TextBox_KeyDown" Name="InputTextbox"/>
+        </Grid>
+    </DockPanel>
 </Window>

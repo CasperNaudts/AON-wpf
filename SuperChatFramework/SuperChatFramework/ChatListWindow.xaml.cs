@@ -117,10 +117,6 @@ namespace SuperChatFramework
             string xmlKey = File.ReadAllText(openFileDialog.FileName);
 
             _privateKey.FromXmlString(xmlKey);
-
-            //CspParameters cp = new CspParameters();
-            //cp.KeyContainerName = "SuperChat" + _loggedInUser.Name;
-            
         }
 
         private void ExportKeyMenuItem_Click(object sender, RoutedEventArgs e)
