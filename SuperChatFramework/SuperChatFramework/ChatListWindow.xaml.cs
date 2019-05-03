@@ -109,12 +109,17 @@ namespace SuperChatFramework
             openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             openFileDialog.ShowDialog();
 
+            if (openFileDialog.FileName == "")
+            {
+                return;
+            }
+
             string xmlKey = File.ReadAllText(openFileDialog.FileName);
 
             _privateKey.FromXmlString(xmlKey);
 
-            CspParameters cp = new CspParameters();
-            cp.KeyContainerName = "SuperChat" + _loggedInUser.Name;
+            //CspParameters cp = new CspParameters();
+            //cp.KeyContainerName = "SuperChat" + _loggedInUser.Name;
             
         }
 
@@ -126,6 +131,11 @@ namespace SuperChatFramework
             saveFileDialog.Title = "Export Key";
             saveFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog.ShowDialog();
+
+            if (saveFileDialog.FileName == "")
+            {
+                return;
+            }
 
             File.WriteAllText(saveFileDialog.FileName, _privateKey.ToXmlString(true));
         }
