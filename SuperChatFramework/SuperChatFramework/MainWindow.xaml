@@ -12,5 +12,6 @@
         <PasswordBox x:Name="PasswordPasswordBox" HorizontalAlignment="Center" Margin="236,159,59,0" VerticalAlignment="Top" Height="85" Width="500" FontSize="48" KeyDown="TextBox_KeyDown"/>
         <Button x:Name="LoginButton" HorizontalAlignment="Center" Margin="58,277,59,0" VerticalAlignment="Top" Height="85" Width="678" FontSize="48" Content="Login" Click="LoginButton_Click"/>
         <Button x:Name="RegisterButton" HorizontalAlignment="Center" Margin="58,367,59,0" VerticalAlignment="Top" Height="85" Width="678" FontSize="48" Content="Registreer" Click="RegisterButton_Click"/>
+        <Label Content="Password" Margin="58,159,564,238.5" FontSize="24"/>
     </Grid>
 </Window>
