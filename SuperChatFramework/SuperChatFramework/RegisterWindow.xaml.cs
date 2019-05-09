@@ -22,7 +22,7 @@ namespace SuperChatFramework
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            var usersWithSameName = context.Users.Where(u => u.Name == UsernameTextbox.Text).ToList();
+            var usersWithSameName = context.Users.Where(u => u.Name == UsernameTextbox.Text.ToLower()).ToList();
             if(usersWithSameName.Count > 0)
             {
                 MessageBox.Show("De gebruikersnaam is al in gebruik");
@@ -36,7 +36,7 @@ namespace SuperChatFramework
             }
 
             var user = new User();
-            user.Name = UsernameTextbox.Text;
+            user.Name = UsernameTextbox.Text.ToLower();
             user.Salt = Guid.NewGuid().ToString();
             user.Password = Hash.HashInput(PasswordBox.Password, user.Salt);
 

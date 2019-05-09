@@ -106,7 +106,7 @@ namespace SuperChatFramework
             OpenFileDialog openFileDialog = new OpenFileDialog();
             openFileDialog.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
             openFileDialog.Title = "Inport Key";
-            openFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            openFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             openFileDialog.ShowDialog();
 
             if (openFileDialog.FileName == "")
@@ -125,7 +125,7 @@ namespace SuperChatFramework
             saveFileDialog.AddExtension = true;
             saveFileDialog.Filter = "xml files (*.xml)|*.xml|All files (*.*)|*.*";
             saveFileDialog.Title = "Export Key";
-            saveFileDialog.InitialDirectory = System.Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.InitialDirectory = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
             saveFileDialog.ShowDialog();
 
             if (saveFileDialog.FileName == "")

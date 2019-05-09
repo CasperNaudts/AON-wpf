@@ -17,12 +17,12 @@
                 <RowDefinition Height="Auto"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
             </Grid.RowDefinitions>
-            <Button Height="auto" Width="auto" Grid.Row="0" Name="nieuweChatButton" Click="NieuweChatButton_Click" Margin="0,0,50,0">
+            <Button Height="auto" Width="auto" Grid.Row="0" Name="NieuweChatButton" Click="NieuweChatButton_Click" Margin="0,0,50,0">
                 <Grid>
                     <Label Content="+  nieuwe chat starten"></Label>
                 </Grid>
             </Button>
-            <Button x:Name="LogoutButton" Content="Logout" Margin="434,0,0,0" Click="LogoutButton_Click">
+            <Button Grid.Row="0" x:Name="LogoutButton" Content="Logout" Margin="434,0,0,0" Click="LogoutButton_Click">
 
             </Button>
             <ListView Grid.Row="1" x:Name="ChatToUsersListView">

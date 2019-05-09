@@ -21,7 +21,7 @@ namespace SuperChatFramework
 
         private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            login();
+            Login();
         }
 
         private void RegisterButton_Click(object sender, RoutedEventArgs e)
@@ -35,11 +35,11 @@ namespace SuperChatFramework
         {
             if (e.Key == Key.Enter)
             {
-                login();
+                Login();
             }
         }
 
-        private void login()
+        private void Login()
         {
             SuperChatContext context = new SuperChatContext();
             if (UsernameTextBox.Text == "" || PasswordPasswordBox.Password == "")
@@ -54,7 +54,7 @@ namespace SuperChatFramework
                 return;
             }
 
-            User user = context.Users.First(u => u.Name == UsernameTextBox.Text);
+            User user = context.Users.First(u => u.Name == UsernameTextBox.Text.ToLower());
             if (Hash.HashInput(PasswordPasswordBox.Password, user.Salt) != user.Password)
             {
                 MessageBox.Show("foutieve inloggegevens");

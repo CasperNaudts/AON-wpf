@@ -11,18 +11,16 @@ namespace SuperChatFramework
     {
         private User _logedInUser;
         private readonly SuperChatContext _context;
-        private List<Key> _otherUserInChat;
 
         public NewChatWindow(User logedInUser, List<Key> otherUserInChat)
         {
             _logedInUser = logedInUser;
-            _otherUserInChat = otherUserInChat;
             InitializeComponent();
 
             _context = new SuperChatContext();
             var users = _context.Users.Where(user => user != _logedInUser).ToList();
 
-            foreach (var key in _otherUserInChat)
+            foreach (var key in otherUserInChat)
             {
                 var currentUser = _context.Users.Find(key.UserId);
                 users.Remove(currentUser);
