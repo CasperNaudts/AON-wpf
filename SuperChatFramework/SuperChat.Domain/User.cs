@@ -1,4 +1,6 @@
-﻿namespace SuperChat.Domain
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SuperChat.Domain
 {
     public class User
     {

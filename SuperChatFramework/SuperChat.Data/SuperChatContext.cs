@@ -17,5 +17,14 @@ namespace SuperChat.Data
             optionsBuilder.UseMySql(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
             base.OnConfiguring(optionsBuilder);
         }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<User>().Property(b => b.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Message>().Property(b => b.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Chat>().Property(b => b.Id).ValueGeneratedOnAdd();
+            modelBuilder.Entity<Key>().Property(b => b.Id).ValueGeneratedOnAdd();
+            base.OnModelCreating(modelBuilder);
+        }
     }
 }

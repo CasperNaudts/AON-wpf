@@ -154,17 +154,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Migrations\20190424182043_addIdFieldsToUser.cs" />
-    <Compile Include="Migrations\20190424182043_addIdFieldsToUser.designer.cs">
-      <DependentUpon>20190424182043_addIdFieldsToUser.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190426102211_addSalt.cs" />
-    <Compile Include="Migrations\20190426102211_addSalt.designer.cs">
-      <DependentUpon>20190426102211_addSalt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20190509102146_CreateIdentityModels.cs" />
-    <Compile Include="Migrations\20190509102146_CreateIdentityModels.designer.cs">
-      <DependentUpon>20190509102146_CreateIdentityModels.cs</DependentUpon>
+    <Compile Include="Migrations\20190511112630_incrementID.cs" />
+    <Compile Include="Migrations\20190511112630_incrementID.designer.cs">
+      <DependentUpon>20190511112630_incrementID.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\SuperChatContextModelSnapshot.cs" />
     <Compile Include="SuperChatContext.cs" />

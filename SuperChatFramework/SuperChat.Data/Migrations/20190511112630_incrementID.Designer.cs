@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SuperChat.Data;
@@ -10,22 +9,20 @@ using SuperChat.Data;
 namespace SuperChat.Data.Migrations
 {
     [DbContext(typeof(SuperChatContext))]
-    [Migration("20190424182043_addIdFieldsToUser")]
-    partial class AddIdFieldsToUser
+    [Migration("20190511112630_incrementID")]
+    partial class incrementID
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
             modelBuilder.Entity("SuperChat.Domain.Chat", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.HasKey("Id");
 
@@ -35,8 +32,7 @@ namespace SuperChat.Data.Migrations
             modelBuilder.Entity("SuperChat.Domain.Key", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int>("ChatId");
 
@@ -56,14 +52,13 @@ namespace SuperChat.Data.Migrations
             modelBuilder.Entity("SuperChat.Domain.Message", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<int?>("ChatId");
 
                     b.Property<string>("Content");
 
-                    b.Property<byte[]>("IV");
+                    b.Property<byte[]>("Iv");
 
                     b.Property<int>("RecieverId");
 
@@ -81,14 +76,15 @@ namespace SuperChat.Data.Migrations
             modelBuilder.Entity("SuperChat.Domain.User", b =>
                 {
                     b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .ValueGeneratedOnAdd();
 
                     b.Property<string>("Name");
 
                     b.Property<string>("Password");
 
                     b.Property<string>("PublicKey");
+
+                    b.Property<string>("Salt");
 
                     b.HasKey("Id");
 

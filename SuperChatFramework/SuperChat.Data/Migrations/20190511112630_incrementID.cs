@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SuperChat.Data.Migrations
 {
-    public partial class AddIdFieldsToUser : Migration
+    public partial class incrementID : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -13,7 +13,7 @@ namespace SuperChat.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn)
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn)
                 },
                 constraints: table =>
                 {
@@ -25,10 +25,11 @@ namespace SuperChat.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Name = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true),
-                    PublicKey = table.Column<string>(nullable: true)
+                    PublicKey = table.Column<string>(nullable: true),
+                    Salt = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -40,12 +41,12 @@ namespace SuperChat.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     Content = table.Column<string>(nullable: true),
                     SenderId = table.Column<int>(nullable: false),
                     RecieverId = table.Column<int>(nullable: false),
                     TimeSend = table.Column<DateTime>(nullable: false),
-                    IV = table.Column<byte[]>(nullable: true),
+                    Iv = table.Column<byte[]>(nullable: true),
                     ChatId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
@@ -64,7 +65,7 @@ namespace SuperChat.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                        .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     ChatId = table.Column<int>(nullable: false),
                     UserId = table.Column<int>(nullable: false),
                     KeyBytes = table.Column<byte[]>(nullable: true)
